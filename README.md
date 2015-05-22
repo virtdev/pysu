@@ -1,2 +1,2 @@
 # pysu
-A Python implementation of su
+A Python implementation of su (for pyboard)
