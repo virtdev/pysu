@@ -4,7 +4,7 @@ def send(buf):
     except:
         pass
 
-def pin2index(pin):
+def name2index(pin):
     val = int(pin[1:])
     if val >= 128:
         return

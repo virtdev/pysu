@@ -4,12 +4,12 @@ from lib.pulse import *
 from dev.driver import Driver
 
 class HT(Driver):
-    def setup(self):
-        self.set(mode=MODE_POLL | MODE_SYNC | MODE_OUT | MODE_VISI, rng={'Humidity':[0, 100], 'Celsius':[-100, 100]}, freq=0.01)
+    def __init__(self, name):
+        Driver.__init__(self, name, mode=MODE_POLL | MODE_SYNC | MODE_OUT | MODE_VISI, rng={'Humidity':[0, 100], 'Celsius':[-100, 100]}, freq=0.01)
     
     def get(self):
         data = [0] * 5
-        pin = pyb.Pin(self.get_pin(), pyb.Pin.OUT_PP)
+        pin = pyb.Pin(self.get_name(), pyb.Pin.OUT_PP)
         pin.low()
         pyb.delay(25)
         pin.high()

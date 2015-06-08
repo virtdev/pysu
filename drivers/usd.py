@@ -8,13 +8,10 @@ D_MAX = 100
 
 class USD(Driver):
     def __init__(self, trig, echo):
-        Driver.__init__(self, echo)
+        Driver.__init__(self, echo, mode=MODE_TRIG | MODE_VISI, rng={'Enable':[True, False]})
         self._echo = pyb.Pin(echo, pyb.Pin.IN)
         self._trig = pyb.Pin(trig, pyb.Pin.OUT_PP)
         self._trig.low()
-    
-    def setup(self):
-        self.set(mode=MODE_TRIG | MODE_VISI, rng={'Enable':[True, False]})
     
     def get(self):
         self._trig.high()

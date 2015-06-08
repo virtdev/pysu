@@ -6,12 +6,12 @@ from dev.driver import Driver
 INTERVAL = 30000 # ms
 
 class Dust(Driver):
-    def setup(self):
-        self._result = 0
-        self._occupancy = 0
+    def __init__(self, name):
+        Driver.__init__(self, name, mode=MODE_POLL | MODE_SYNC | MODE_OUT | MODE_VISI, rng={'ug/m3':[0, 1000]}, freq=0.01)
+        self._input = pyb.Pin(name, pyb.Pin.IN)
         self._start = pyb.millis()
-        self._input = pyb.Pin(self.get_pin(), pyb.Pin.IN)
-        self.set(mode=MODE_POLL | MODE_SYNC | MODE_OUT | MODE_VISI, rng={'ug/m3':[0, 1000]}, freq=0.01)
+        self._occupancy = 0
+        self._result = 0
     
     def get(self):
         duration = pulseIn(self._input, LOW)

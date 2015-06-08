@@ -5,32 +5,34 @@ from dev.controller import Controller
 
 __func = None
 __args = None
+__active = False
 __ctrl = Controller()
 
-def create():
+def __create():
     for item in devices:
         try:
             exec('from drivers.%s import %s' % (item.lower(), item))
-            pin = devices[item]
-            if type(pin) == str:
-                exec("__ctrl.add(%s('%s'))" % (item, pin))
-            elif type(pin) == tuple:
-                exec("__ctrl.add(%s%s)" % (item, str(pin)))
+            name = devices[item]
+            if type(name) == str:
+                exec("__ctrl.add(%s('%s'))" % (item, name))
+            elif type(name) == tuple:
+                exec("__ctrl.add(%s%s)" % (item, str(name)))
         except:
             pass
 
-def setup():
-    create()
-    __ctrl.setup()
-
 def mount():
+    global __active
+    
+    if not __active:
+        __active = True
+        __create()
     __ctrl.mount()
 
 def process(index, op):
     __ctrl.process(index, op, __args)
 
 def test():
-    setup()
+    __create()
     while(True):
         __ctrl.trig()
         __ctrl.poll()

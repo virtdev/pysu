@@ -1,31 +1,26 @@
 from lib.event import Event
-from lib.util import pin2index
+from lib.util import name2index
 
 class Driver(object):
-    def __init__(self, pin):
-        self.__pin = pin
+    def __init__(self, name, mode=0, rng=None, freq=None):
         self.__mode = 0
+        self.__name = name
         self.__freq = None
         self.__range = None
         self.event = Event()
-        self.__index = pin2index(pin)
-    
-    def set(self, mode=0, rng=None, freq=None):
-        self.__mode = mode
-        self.__freq = freq
-        self.__range = rng
+        self.__index = name2index(name)
     
     def __str__(self):
         return self.__class__.__name__
+    
+    def get_name(self):
+        return self.__name
     
     def get_mode(self):
         return self.__mode
     
     def get_index(self):
         return self.__index
-    
-    def get_pin(self):
-        return self.__pin
     
     def get_info(self):
         ret = {'type':str(self), 'mode':self.__mode}
@@ -37,9 +32,6 @@ class Driver(object):
     
     def callback(self):
         self.event.set()
-    
-    def setup(self):
-        pass
     
     def open(self):
         pass

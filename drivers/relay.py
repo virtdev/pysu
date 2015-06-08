@@ -3,10 +3,10 @@ from lib.mode import *
 from dev.driver import Driver
 
 class Relay(Driver):
-    def setup(self):
+    def __init__(self, name):
+        Driver.__init__(self, name, mode=MODE_SWITCH | MODE_VISI)
+        self._relay = pyb.Pin(name, pyb.Pin.OUT_PP)
         self._enable = False
-        self._relay = pyb.Pin(self.get_pin(), pyb.Pin.OUT_PP)
-        self.set(mode=MODE_SWITCH | MODE_VISI)
     
     def open(self):
         if not self._enable:

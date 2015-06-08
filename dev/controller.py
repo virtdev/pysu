@@ -17,13 +17,6 @@ class Controller(object):
         except:
             pass
     
-    def setup(self):
-        try:
-            for i in self._devices:
-                self._devices[i].setup()
-        except:
-            pass
-    
     def find(self, index):
         return self._devices.get(index)
     
