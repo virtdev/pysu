@@ -1,5 +1,12 @@
+# dust.py
+#
+# Copyright (C) 2016 Yi-Wei Ci
+#
+# Distributed under the terms of the MIT license.
+#
+
 import pyb
-from lib.mode import *
+from lib.modes import *
 from lib.pulse import *
 from dev.driver import Driver
 
@@ -7,7 +14,7 @@ INTERVAL = 30000 # ms
 
 class Dust(Driver):
     def __init__(self, name):
-        Driver.__init__(self, name, mode=MODE_POLL | MODE_SYNC | MODE_OUT | MODE_VISI, rng={'ug/m3':[0, 1000]}, freq=0.01)
+        Driver.__init__(self, name, mode=MODE_POLL | MODE_SYNC | MODE_OUT | MODE_VISI, freq=0.01, spec={'dust':{'type':'int', 'range':[0, 1000], 'unit':'ug/m3'}})
         self._input = pyb.Pin(name, pyb.Pin.IN)
         self._start = pyb.millis()
         self._occupancy = 0
@@ -25,4 +32,4 @@ class Dust(Driver):
             self._occupancy = 0
             self._start = pyb.millis()
         if self._result:
-            return {'ug/m3':self._result}
+            return {'dust':self._result}

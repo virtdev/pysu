@@ -1,11 +1,18 @@
+# buzzer.py
+#
+# Copyright (C) 2016 Yi-Wei Ci
+#
+# Distributed under the terms of the MIT license.
+#
+
 import pyb
 from lib import timer
-from lib.mode import *
+from lib.modes import *
 from dev.driver import Driver
 
 class Buzzer(Driver):
     def __init__(self, name):
-        Driver.__init__(self, name, mode=MODE_VISI | MODE_SWITCH)
+        Driver.__init__(self, name, mode=MODE_SWITCH | MODE_VISI)
         self._ti, self._ch = timer.alloc(name)
         self._pin = pyb.Pin(name)
         self._timer = None

@@ -1,11 +1,18 @@
+# ht.py
+#
+# Copyright (C) 2016 Yi-Wei Ci
+#
+# Distributed under the terms of the MIT license.
+#
+
 import pyb
-from lib.mode import *
+from lib.modes import *
 from lib.pulse import *
 from dev.driver import Driver
 
 class HT(Driver):
     def __init__(self, name):
-        Driver.__init__(self, name, mode=MODE_POLL | MODE_SYNC | MODE_OUT | MODE_VISI, rng={'Humidity':[0, 100], 'Celsius':[-100, 100]}, freq=0.01)
+        Driver.__init__(self, name, mode=MODE_POLL | MODE_SYNC | MODE_OUT | MODE_VISI, freq=0.01, spec={'humidity':{'type':'int', 'range':[0, 100], 'unit':'%'}, 'temperature':{'type':'int', 'range':[-100, 100], 'unit':'Celsius'}})
     
     def get(self):
         data = [0] * 5
@@ -24,4 +31,4 @@ class HT(Driver):
                 elif val >= 40:
                     data[i] |= 1 << (7 - j)
         if data[4] == data[0] + data[2]:
-            return {'Humidity':data[0], 'Celsius':data[2]}
+            return {'humidity':data[0], 'temperature':data[2]}

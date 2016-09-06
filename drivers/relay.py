@@ -1,5 +1,12 @@
+# relay.py
+#
+# Copyright (C) 2016 Yi-Wei Ci
+#
+# Distributed under the terms of the MIT license.
+#
+
 import pyb
-from lib.mode import *
+from lib.modes import *
 from dev.driver import Driver
 
 class Relay(Driver):

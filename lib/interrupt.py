@@ -1,3 +1,10 @@
+# interrupt.py
+#
+# Copyright (C) 2016 Yi-Wei Ci
+#
+# Distributed under the terms of the MIT license.
+#
+
 import pyb
 
 INTP_MAX = 16

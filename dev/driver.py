@@ -1,12 +1,19 @@
+# driver.py
+#
+# Copyright (C) 2016 Yi-Wei Ci
+#
+# Distributed under the terms of the MIT license.
+#
+
 from lib.event import Event
 from lib.util import name2index
 
 class Driver(object):
-    def __init__(self, name, mode=0, rng=None, freq=None):
-        self.__mode = 0
+    def __init__(self, name, mode=0, freq=None, spec=None):
+        self.__mode = mode
         self.__name = name
-        self.__freq = None
-        self.__range = None
+        self.__freq = freq
+        self.__spec = spec
         self.event = Event()
         self.__index = name2index(name)
     
@@ -22,13 +29,13 @@ class Driver(object):
     def get_index(self):
         return self.__index
     
-    def get_info(self):
-        ret = {'type':str(self), 'mode':self.__mode}
+    def get_profile(self):
+        info = {'type':str(self), 'mode':self.__mode}
         if self.__freq:
-            ret.update({'freq':self.__freq})
-        if self.__range:
-            ret.update({'range':self.__range})
-        return ret
+            info.update({'freq':self.__freq})
+        if self.__spec:
+            info.update({'spec':self.__spec})
+        return info
     
     def callback(self):
         self.event.set()

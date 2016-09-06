@@ -1,3 +1,10 @@
+# timer.py
+#
+# Copyright (C) 2016 Yi-Wei Ci
+#
+# Distributed under the terms of the MIT license.
+#
+
 TIMER_MAX = 11
 
 _functions = {}

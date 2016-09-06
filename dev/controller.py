@@ -1,7 +1,14 @@
+# controller.py
+#
+# Copyright (C) 2016 Yi-Wei Ci
+#
+# Distributed under the terms of the MIT license.
+#
+
 import ujson
-from lib.op import *
-from lib.mode import *
+from lib.modes import *
 from lib.util import send
+from lib.operations import *
 
 class Controller(object):
     def __init__(self):
@@ -23,11 +30,11 @@ class Controller(object):
     def mount(self):
         info = {}
         for i in self._devices:
-            info.update({i:self._devices[i].get_info()})
+            info.update({i:self._devices[i].get_profile()})
         send(info)
     
     def process(self, index, op, args):
-        if op not in Operations:
+        if op not in OP:
             return
         device = self._devices.get(index)
         if not device:

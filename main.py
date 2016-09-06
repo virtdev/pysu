@@ -1,6 +1,13 @@
+# main.py
+#
+# Copyright (C) 2016 Yi-Wei Ci
+#
+# Distributed under the terms of the MIT license.
+#
+
 import time
 from lib.util import send
-from devices import devices
+from conf.pysu import devices
 from dev.controller import Controller
 
 __func = None
