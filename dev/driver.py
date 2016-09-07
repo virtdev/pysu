@@ -49,6 +49,5 @@ class Driver(object):
     def get(self):
         pass
     
-    def put(self, args):
+    def put(self, *args, **kwargs):
         pass
-    

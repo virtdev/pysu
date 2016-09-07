@@ -10,8 +10,9 @@ from lib.util import send
 from conf.pysu import devices
 from dev.controller import Controller
 
+__args = []
+__kwargs = {}
 __func = None
-__args = None
 __active = False
 __ctrl = Controller()
 
@@ -36,7 +37,8 @@ def mount():
     __ctrl.mount()
 
 def process(index, op):
-    __ctrl.process(index, op, __args)
+    if type(__args) == list and type(__kwargs) == dict:
+        __ctrl.process(index, op, *__args, **__kwargs)
 
 def test():
     __create()
@@ -48,8 +50,9 @@ def test():
 def execute():
     try:
         if __func:
-            res = __func(__args)
-            if res:
-                send(res)
+            if type(__kwargs) == dict:
+                res = __func(**__kwargs)
+                if res:
+                    send(res)
     except:
         pass

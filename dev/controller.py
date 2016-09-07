@@ -33,7 +33,7 @@ class Controller(object):
             info.update({i:self._devices[i].get_profile()})
         send(info)
     
-    def process(self, index, op, args):
+    def process(self, index, op, *args, **kwargs):
         if op not in OP:
             return
         device = self._devices.get(index)
@@ -44,7 +44,7 @@ class Controller(object):
             if op == OP_GET:
                 ret = device.get()
             elif op == OP_PUT:
-                ret = device.put(args)
+                ret = device.put(*args, **kwargs)
             elif op == OP_OPEN:
                 device.open()
             elif op == OP_CLOSE:
