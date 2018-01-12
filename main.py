@@ -30,7 +30,7 @@ def __create():
 
 def mount():
     global __active
-    
+
     if not __active:
         __active = True
         __create()

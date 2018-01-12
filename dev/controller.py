@@ -13,26 +13,26 @@ from lib.operations import *
 class Controller(object):
     def __init__(self):
         self._devices = {}
-    
+
     def add(self, device):
         if not device:
             return
         try:
-            index = device.get_index() 
+            index = device.get_index()
             if index != None:
                 self._devices.update({index:device})
         except:
             pass
-    
+
     def find(self, index):
         return self._devices.get(index)
-    
+
     def mount(self):
         info = {}
         for i in self._devices:
             info.update({i:self._devices[i].get_profile()})
         send(info)
-    
+
     def process(self, index, op, *args, **kwargs):
         if op not in OP:
             return
@@ -53,7 +53,7 @@ class Controller(object):
                 send(ret)
         except:
             pass
-    
+
     def trig(self):
         results = {}
         try:
@@ -65,10 +65,10 @@ class Controller(object):
                         results.update({i:ret})
         except:
             pass
-        
+
         if results:
             send(results)
-    
+
     def poll(self):
         results = {}
         try:
@@ -80,6 +80,6 @@ class Controller(object):
                         results.update({i:ret})
         except:
             pass
-        
+
         if results:
             send(results)

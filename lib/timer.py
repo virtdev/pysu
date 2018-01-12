@@ -14,15 +14,15 @@ class Timer(object):
     def __init__(self):
         self._cnt = 0
         self._curr = {}
-    
+
     def alloc(self, pin):
         if self._cnt >= TIMER_MAX:
             return
-        
+
         timers = _timers.get(pin)
         if not timers:
             return
-        
+
         curr = self._curr.get(pin)
         if curr:
             pos = len(curr)
@@ -32,7 +32,7 @@ class Timer(object):
         else:
             pos = 0
             self._curr.update({pin:[timers[pos]]})
-        
+
         self._cnt += 1
         return timers[pos]
 
@@ -44,7 +44,7 @@ def alloc(pin):
 def _proc(name):
     func = _functions.get(name)
     func()
-    
+
 def _timer0(arg):
     _proc(0)
 

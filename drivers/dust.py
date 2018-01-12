@@ -19,7 +19,7 @@ class Dust(Driver):
         self._start = pyb.millis()
         self._occupancy = 0
         self._result = 0
-    
+
     def get(self):
         duration = pulseIn(self._input, LOW)
         if duration:

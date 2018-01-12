@@ -14,7 +14,7 @@ _functions = {}
 def _proc(name):
     func = _functions.get(name)
     func()
-    
+
 def _int0(arg):
     _proc(0)
 
@@ -38,7 +38,7 @@ def _int6(arg):
 
 def _int7(arg):
     _proc(7)
-    
+
 def _int8(arg):
     _proc(8)
 
@@ -56,7 +56,7 @@ def _int12(arg):
 
 def _int13(arg):
     _proc(13)
-    
+
 def _int14(arg):
     _proc(14)
 

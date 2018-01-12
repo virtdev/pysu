@@ -19,7 +19,7 @@ class USD(Driver):
         self._echo = pyb.Pin(echo, pyb.Pin.IN)
         self._trig = pyb.Pin(trig, pyb.Pin.OUT_PP)
         self._trig.low()
-    
+
     def get(self):
         self._trig.high()
         pyb.udelay(10)
